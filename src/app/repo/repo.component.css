@@ -1,0 +1,14 @@
+.repo-container{
+    border: 1px solid gray;
+    padding: 1rem 1rem;
+}
+
+.repo-primary-text{
+    color: royalblue;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.repo-secondary-text{
+    font-size: 14px;
+}

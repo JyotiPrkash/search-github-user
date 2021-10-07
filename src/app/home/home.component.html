@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 search-container">
+      <i class="fa fa-search"></i>
+      <input
+        class="form-control search-box"
+        [(ngModel)]="searchQuery"
+        type="text"
+        placeholder="Search Git Username.."
+        (keyup.enter)="searchUser()"
+      />
+    </div>
+  </div>
+  <app-loader *ngIf="isLoaderActive && isSearched" ></app-loader>
+  <div class="row" *ngIf="!isLoaderActive && isSearched">
+    <div class="col-sm-12">
+      <ng-container *ngIf="userdata">
+        <app-user-details [user]="userdata"></app-user-details>
+      </ng-container>
+    </div>
+
+    <div class="col-sm-12 row" *ngIf="repoList.length > 0">
+      <div class="col-sm-6 repo-holder" *ngFor="let repo of repoList">
+        <app-repo [repo]="repo"></app-repo>
+      </div>
+    </div>
+    <div class="col-sm-12 row" *ngIf="repoList.length == 0">
+      No Repo Available..
+    </div>
+    <div class="col-sm-12 row" *ngIf="repoList.length > 0">
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [maxSize]="100"
+        [collectionSize]="totalRepoCount"
+        [(page)]="pageNumber"
+        aria-label="Default pagination"
+        (pageChange)="getRepos()"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+

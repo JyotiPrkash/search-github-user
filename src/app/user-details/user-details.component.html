@@ -1,0 +1,32 @@
+<div class="row details-container">
+    <div class="col-md-3 col-sm-12 img-container">
+        <div class="column">
+            <img class="col-sm-12 img-css" src="{{this.user.avatar_url}}" alt="avatar">
+            <div class="col-sm-12 secondary-text link" (click)="onNavigate(user.html_url)"><i class="fa fa-link"></i> <a>{{user.html_url}}</a></div>
+        </div>
+        
+    </div>
+    <div class="col-md-9 col-sm-12">
+        <div class="row">
+            <span class="col-sm-12 primary-text">{{user.name}}</span>
+            <span class="col-sm-12 secondary-text">{{user.bio}}</span>
+            <span class="col-sm-12 secondary-text">
+                <ng-container *ngIf="user.location">
+                    <i class="fa fa-map-marker"></i> {{user.location}}
+                </ng-container>
+                <ng-container *ngIf="!user.location">
+                    Not Available
+                </ng-container>
+            </span>
+            <span class="col-sm-12 secondary-text">
+                <ng-container *ngIf="user.twitter_username">
+                    Twitter : {{user.twitter_username}}
+                </ng-container>
+                <ng-container *ngIf="!user.twitter_username">
+                    Twitter : Not Available
+                </ng-container>
+                
+            </span>
+        </div>
+    </div>
+</div>

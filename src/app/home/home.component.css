@@ -1,0 +1,15 @@
+.search-container {
+    position: relative;
+  }
+
+  .search-box{
+    margin-top: 1rem;
+  }
+  .fa-search {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.5rem;
+  }
+  .repo-holder{
+    padding: 1rem 2rem;
+  }

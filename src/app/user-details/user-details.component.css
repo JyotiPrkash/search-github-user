@@ -1,0 +1,25 @@
+.img-css{
+    height: 10rem;
+    width: 10rem;
+    border-radius: 5rem;
+}
+.img-container{
+    text-align: center;
+}
+.details-container{
+    margin: 2rem 0rem;
+}
+.primary-text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.secondary-text{
+    font-size: 14px;
+}
+
+.link{
+    color:royalblue;
+    cursor: pointer;
+}

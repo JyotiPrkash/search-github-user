@@ -1,0 +1,12 @@
+<div class="col-sm-12 repo-container">
+  <p class="repo-primary-text">{{ repo["name"] }}</p>
+  <p class="repo-secondary-text">
+        <ng-container *ngIf="repo['description']">
+            {{ repo["description"] }}
+        </ng-container>
+        <ng-container *ngIf="!repo['description']">
+            Not Available
+        </ng-container>
+        <app-topics [repoName]="repoName" [user]="repoOwner"></app-topics>
+    </p>
+</div>
