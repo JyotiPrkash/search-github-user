@@ -1,6 +1,9 @@
 .repo-container{
-    border: 1px solid gray;
+    border: 0px;
     padding: 1rem 1rem;
+    box-shadow: rgb(0 0 0 / 30%) 0px 5px 15px;
+    border-radius: 5px;
+    background: radial-gradient(#76b2fe, #b69efe);
 }
 
 .repo-primary-text{
@@ -10,5 +13,7 @@
 }
 
 .repo-secondary-text{
-    font-size: 14px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
 }

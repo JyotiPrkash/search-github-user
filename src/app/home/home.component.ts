@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
 import  {  NgbToast, NgbToastService, NgbToastType }  from  'ngb-toast';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subject } from 'rxjs-compat';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,23 @@ export class HomeComponent implements OnInit {
   show:boolean = true;
   toastSuccess: NgbToast;
   toastError: NgbToast;
-  constructor(private server : ServerService, private  toastService:  NgbToastService) { }
+  isRepoLoader:boolean = false;
+  isProfileLoader:boolean = false;
+
+
+  searchUserRequest = new Subject<string>();
+
+  constructor(private server : ServerService, private  toastService:  NgbToastService) {
+    
+    this.searchUserRequest.pipe(
+      debounceTime(1000),
+      distinctUntilChanged())
+      .subscribe(value => {
+        console.log(value)
+        this.searchUser();
+      });
+
+   }
 
   ngOnInit(): void {
 
@@ -40,8 +58,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchUser(){
-    this.isLoaderActive = true;
-    this.isSearched = true;
+    this.isProfileLoader = true;
     this.server.getUserByUserid(this.searchQuery).subscribe((response) => {
 
         this.userdata = response;
@@ -50,25 +67,26 @@ export class HomeComponent implements OnInit {
         this.toastSuccess.text = "Fetched public repos of "+ this.userdata['name']
       
         this.toastService.show(this.toastSuccess);
-      
+        this.isProfileLoader = false;
     }, (error:HttpErrorResponse) => {
       this.userdata = {};
-      this.isLoaderActive = false;
       this.isSearched = false;
+      this.isProfileLoader = false;
       this.toastError.text = error['message'];
       this.toastService.show(this.toastError);
     });
   }
 
   getRepos(){
+    this.isRepoLoader = true;
     this.server.getRepoListByUserid(this.searchQuery, this.pageNumber).subscribe((response) => {
       this.repoList = response;
-      this.isLoaderActive = false;
       this.isSearched = true;
+      this.isRepoLoader = false;
     }, (error:HttpErrorResponse) => {
       this.repoList = [];
-      this.isLoaderActive = false;
       this.isSearched = true;
+      this.isRepoLoader = false;
       this.toastError.text = error['message'];
       this.toastService.show(this.toastError);
     });

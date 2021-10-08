@@ -7,24 +7,26 @@
         [(ngModel)]="searchQuery"
         type="text"
         placeholder="Search Git Username.."
-        (keyup.enter)="searchUser()"
+        (keyup)="searchUserRequest.next($event)"
       />
     </div>
   </div>
-  <app-loader *ngIf="isLoaderActive && isSearched" ></app-loader>
-  <div class="row" *ngIf="!isLoaderActive && isSearched">
+  <app-loader [profileLoader]="isProfileLoader" [repoLoader]="false" ></app-loader>
+  <div class="row">
     <div class="col-sm-12">
-      <ng-container *ngIf="userdata">
+      <ng-container *ngIf="userdata && !isProfileLoader">
         <app-user-details [user]="userdata"></app-user-details>
       </ng-container>
     </div>
 
-    <div class="col-sm-12 row" *ngIf="repoList.length > 0">
+    <app-loader [profileLoader]="false" [repoLoader]="isRepoLoader" ></app-loader>
+    <div class="col-sm-12 row" *ngIf="repoList.length > 0 && !isRepoLoader">
       <div class="col-sm-6 repo-holder" *ngFor="let repo of repoList">
         <app-repo [repo]="repo"></app-repo>
       </div>
     </div>
-    <div class="col-sm-12 row" *ngIf="repoList.length == 0">
+
+    <div class="col-sm-12 row" *ngIf="repoList.length == 0 && !isRepoLoader && isSearched">
       No Repo Available..
     </div>
     <div class="col-sm-12 row" *ngIf="repoList.length > 0">

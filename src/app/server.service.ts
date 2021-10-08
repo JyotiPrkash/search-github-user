@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from './global.service';
-import { map, catchError } from 'rxjs/operators'
+import { map, catchError, shareReplay } from 'rxjs/operators'
 import { of, throwError } from 'rxjs';
 
 @Injectable({
@@ -17,6 +17,7 @@ export class ServerService {
     let url = this.global.apiEndpoints + this.global.getUserAPI + userID;
     return this.http.get(url).pipe(
       map((res) => res),
+      shareReplay(1, 60000),
       catchError((error: HttpErrorResponse) => throwError(error))
     );
   }
@@ -25,6 +26,7 @@ export class ServerService {
     let url = this.global.apiEndpoints + this.global.getUserAPI + userID + this.global.getRepoList + pageNumber;
     return this.http.get(url).pipe(
       map((res) => res),
+      shareReplay(1, 60000),
       catchError((error: HttpErrorResponse) => throwError(error))
     );
   }
@@ -38,6 +40,7 @@ export class ServerService {
       })
     }).pipe(
       map((res) => res),
+      shareReplay(1, 60000),
       catchError((error: HttpErrorResponse) => throwError(error))
     );
   }

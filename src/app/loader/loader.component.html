@@ -1,23 +1,48 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12 loader-container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="row skeleton-loader pro-pic-loader"></div>
-                </div>
-                <div class="col-sm-9 row">
-                    <div class="col-sm-12 skeleton-loader primary-text-loader"></div>
-                    <div class="col-sm-12 skeleton-loader secondary-text-loader"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 loader-body column">
-                    <div class="col-sm-12 skeleton-loader text-loader" style="width: 80%;"></div>
-                    <div class="col-sm-12 skeleton-loader text-loader" style="width: 90%;"></div>
-                    <div class="col-sm-12 skeleton-loader text-loader" style="width: 70%;"></div>
-                </div>
-            </div>
-            
+  <div class="row" *ngIf="profileLoader">
+    <div class="col-sm-12 loader-container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="row skeleton-loader pro-pic-loader"></div>
         </div>
+        <div class="col-sm-9 row">
+          <div class="col-sm-12 skeleton-loader primary-text-loader"></div>
+          <div class="col-sm-12 skeleton-loader secondary-text-loader"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 loader-body column">
+          <div
+            class="col-sm-12 skeleton-loader text-loader"
+            style="width: 80%"
+          ></div>
+          <div
+            class="col-sm-12 skeleton-loader text-loader"
+            style="width: 90%"
+          ></div>
+          <div
+            class="col-sm-12 skeleton-loader text-loader"
+            style="width: 70%"
+          ></div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class="container">
+    <div *ngIf="repoLoader">
+        <div class="col-sm-12 repo-loader-container">
+          <div class="skeleton-loader repo-loader"></div>
+          <div class="skeleton-loader repo-loader"></div>
+        </div>
+        <div class="col-sm-12 repo-loader-container">
+          <div class="skeleton-loader repo-loader"></div>
+          <div class="skeleton-loader repo-loader"></div>
+        </div>
+        <div class="col-sm-12 repo-loader-container">
+          <div class="skeleton-loader repo-loader"></div>
+          <div class="skeleton-loader repo-loader"></div>
+        </div>
+      </div>
 </div>
